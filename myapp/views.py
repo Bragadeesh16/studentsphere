@@ -69,6 +69,7 @@ def signout(request):
     messages.success(request,"you have been logged out")
     return redirect("home")
 
+@authenticate_users
 def profile(request):
     try:
         user_profile = profiles.objects.get(profile_user=request.user)
@@ -87,6 +88,7 @@ def profile(request):
 
         return render(request,'profile.html',{'form':form,})
     
+@authenticate_staff
 def student_details(request):
     group_two = 'Cse II'
     group_three = 'Cse III'
@@ -104,6 +106,7 @@ def student_details(request):
     
     return render(request,'student_details.html',{'cse_two_details': members_details(group_two),'cse_three_details': members_details(group_three),'cse_four_details': members_details(group_four),'permission':perm})
 
+@authenticate_users
 def groups_list(request):
     perm = False
     cse_two = False

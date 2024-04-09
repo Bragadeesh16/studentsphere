@@ -348,17 +348,28 @@ def manage_groups(request):
 
 
 def download(request, file_id):
-    file = file_uplode.objects.get(pk=file_id)
-    path = file.notes
-    print(path)
-    file_path = os.path.join(settings.MEDIA_ROOT, str(path))
-    print("File Path:", file_path)
-    if os.path.exists(file_path):
-        with open(file_path, 'rb') as fh:
-            response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
-            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
-            return response
-    raise Http404
+    try:
+        file = file_uplode.objects.get(pk=file_id)
+        path = file.notes
+        file_path = os.path.join(settings.MEDIA_ROOT, str(path))
+
+        print("File Path:", file_path)  # Add this line for debugging
+
+        if os.path.exists(file_path):
+            with open(file_path, 'rb') as fh:
+                response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
+                response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+                return response
+        else:
+            print("File does not exist")  # Add this line for debugging
+            raise Http404("File not found")
+    except file_uplode.DoesNotExist:
+        raise Http404("File does not exist")
+    except Exception as e:
+        # Log the exception for further investigation
+        print(f"An error occurred: {str(e)}")
+        # You may want to log more detailed information about the error here
+        raise Http404("An error occurred while processing the request")
 
 class CustomPasswordResetView(PasswordResetView):
     template_name = 'password_reset.html'

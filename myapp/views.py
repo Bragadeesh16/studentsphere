@@ -352,6 +352,7 @@ def download(request, file_id):
     path = file.notes
     print(path)
     file_path = os.path.join(settings.MEDIA_ROOT, str(path))
+    print("File Path:", file_path)
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
             response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")

@@ -1,0 +1,241 @@
+#create-icon{
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+}
+
+#create-form {
+    display: none;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center; 
+}
+
+#create-form input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#create-form button {
+    padding: 15px 30px; 
+    margin-top: 10px;
+}
+
+#create-form #cancel-create {
+    background-color: #FFA500;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 20px;
+}
+
+#create-form #create {
+    background-color: #4CAF50; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 20px; 
+}
+#create-form h2 {
+    text-align: left; 
+    margin-left: 11px;
+}
+.folder_name {
+    box-sizing: border-box; 
+    width: 87%;
+    font-size: 25px;
+    display: inline-block;
+    overflow: hidden;
+    text-decoration: none;
+    background-color:gray;
+    color: white;
+    border-radius: 5px;
+    margin-left: 26px;
+    margin-top: 15px;
+}
+.container {
+    position: relative;
+    display: inline-block;
+}
+.remove-icon{
+    position: relative;
+    right: 2px;
+    margin-bottom: 1.5%;
+}
+.delete-icon{
+    position: relative;
+    right: 2px;
+    margin-bottom: 1.5%;
+}
+.data
+{
+    background-color: gray;
+    width: 80%;
+    margin: 2%;
+    margin-left: 2%;
+    border-radius: 5px;
+}
+.rename-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#rename-form {
+    display: none;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+}
+.delete-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#delete-form {
+    display: none;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+.rename_form{
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+    padding: 50px;
+}
+#cancel-rename{
+    margin-left: 10px;
+    margin-right: 110px;
+    color: white;
+    padding: 12px;
+    border-radius: 5px;
+    background-color: green;
+    margin-top: 10px;
+}
+#rename{
+    margin-right: 25px;
+    margin-left: 100px;
+    margin-top: 10px;
+    color: white;
+    padding: 12px;
+    border-radius: 5px;
+    background-color: red;
+}
+.rename-input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.delete-form{
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+    padding: 40px;
+}
+#cancel-delete{
+    margin-left: 10px;
+    margin-right: 70px;
+    color: white;
+    padding: 12px;
+    border-radius: 5px;
+    background-color: green;
+    margin-top: 10px;
+}
+#delete{
+    margin-right: 25px;
+    margin-left: 60px;
+    margin-top: 10px;
+    color: white;
+    padding: 12px;
+    border-radius: 5px;
+    background-color: red;
+}
+.message{
+    margin-left: 22px;
+}
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    .remove-icon{
+        position: relative;
+        margin-bottom: 5.5%;
+    }
+    .delete-icon{
+        position: relative;
+        margin-bottom: 5.5%;
+    }
+    .data
+    {
+        background-color: gray;
+        width: 90%;
+        margin: 2%;
+        border-radius: 5px;
+    }
+    .folder_name {
+        box-sizing: border-box; 
+        width: 65%;
+        font-size: 25px;
+        display: inline-block;
+        overflow: hidden;
+        text-decoration: none;
+        background-color:gray;
+        color: white;
+        border-radius: 5px;
+        margin-left: 26px;
+        margin-top: 15px;
+    }
+
+}
+@media only screen and (min-width: 768px) and (max-width: 768px){
+    .folder_name {
+        box-sizing: border-box; 
+        width: 75%;
+        font-size: 25px;
+        display: inline-block;
+        overflow: hidden;
+        text-decoration: none;
+        background-color:gray;
+        color: white;
+        border-radius: 5px;
+        margin-left: 35px;
+        margin-top: 11px;
+    }
+}

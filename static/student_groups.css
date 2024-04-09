@@ -1,0 +1,20 @@
+body{
+    width: 100%;
+}
+.cse_second,.cse_three,.cse_four {
+    box-sizing: border-box; 
+    width: 95%;
+    font-size: 20px;
+    display: inline-block;
+    overflow: hidden;
+    text-decoration: none;
+    background-color: darkslateblue;
+    color: white;
+    padding: 1%;
+    border-radius: 5px;
+    margin-left: 2%;
+}
+.cse_second{
+    margin-top: 20px;
+}
+

@@ -1,0 +1,9 @@
+{% for error in form.non_field_errors %}
+    <div class="error">{{error}}</div>
+{% endfor %}
+{% for field in form %}
+    <div class="fieldWrapper my-3 flex flex-col">
+        <div class="error">{{ field.errors }}</div>
+        {{ field.label_tag }} {{ field }}
+    </div>
+{% endfor %}

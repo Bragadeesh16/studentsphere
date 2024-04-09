@@ -1,0 +1,24 @@
+{% extends 'home.html' %}
+{% block main %}
+<div class="form-page">
+    <div class="d2h-container">
+        <h1 class="dare">CSE</h1>
+        <h1 class="two"></h1>
+        <h2 class="hack">IANS</h2>
+    </div>
+    <div class="form-container">
+        <form action="{% url 'signin' %}" method="post" class="form backdrop-blur-sm">
+            {% csrf_token %}
+            {{form}}
+            <input type="hidden" name="next" value="{% if next %}{{next}}{% else %}{% url 'home' %}{% endif %}">
+            <div class="flex justify-between items-center">
+                <input type="submit" value="login" class=" bg-red-600 border-[1px] hover:cursor-pointer text-sm font-inter text-white px-2">
+                <a href="{% url 'resetPassword' %}" class="text-white hover:cursor-pointer  underline text-sm md:text-red-800">Forget password?</a>
+            </div>
+              </button>
+            <p class="mt-4 text-[12px] text-slate-100 md:text-black">Don't have an account? <a href="{% url 'signup' %}?next={{request.GET.next}}" class="text-white underline text-[13px] ml-2 md:text-red-800">Register</a></p>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

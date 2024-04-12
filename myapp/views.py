@@ -76,11 +76,14 @@ def profile(request):
     except profiles.DoesNotExist:
         user_profile = None
 
+    print(request.user.username)
+
     if request.method == 'POST':
-        form = profile_form(request.POST, instance=user_profile)
+        form = profile_form(request.POST, instance=user_profile )
         if form.is_valid():
             instance = form.save(commit=False)
             instance.profile_user = request.user
+            instance.Name = request.user.username
             instance.save()
             return redirect('profile')
     else:

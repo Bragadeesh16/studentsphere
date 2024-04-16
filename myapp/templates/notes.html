@@ -80,7 +80,7 @@
             <form action="{% url 'delete_file' group_id folder_id %}" method="post" id="delete-form-{{ file.id }} " class="delete-form">
               {% csrf_token %}
               <input type="hidden" value="{{ file.id }}" name="file_id">
-              <p style="margin-left: 60px;">Are you sure you want to delete this file </p>
+              <p style="margin-left: 50px;">Are you sure you want to delete this file </p>
               <button id="cancel-delete" type="button">Cancel</button>
               <button type="submit" class="delete">Delete</button>
             </form>

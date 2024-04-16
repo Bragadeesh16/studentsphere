@@ -19,8 +19,6 @@
     border-radius: 5px;
 }  
 .delete{
-    margin-right: 20px;
-    margin-left: 100px;
     margin-top: 10px;
     color: white;
     padding: 12px;
@@ -29,7 +27,7 @@
 }
 #cancel-delete{
     margin-left: 30px;
-    margin-right: 110px;
+    margin-right: 10%;
     color: white;
     padding: 12px;
     border-radius: 5px;
@@ -90,8 +88,6 @@
     margin-top: 10px;
 }
 #uplode{
-    margin-right: 25px;
-    margin-left: 60px;
     margin-top: 10px;
     color: white;
     padding: 12px;
@@ -139,4 +135,14 @@ h4{
         right: 10%;
         margin-top: 4px;
     }
+}
+@media only screen and (min-width: 1024px) and (max-width: 2560px){
+    .delete{
+        margin-left: 30%;
+        
+    }
+    #uplode{
+        margin-left: 20%;
+    }
+
 }

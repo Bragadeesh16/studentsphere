@@ -145,7 +145,7 @@
 }
 #cancel-rename{
     margin-left: 10px;
-    margin-right: 110px;
+    margin-right: 10%;
     color: white;
     padding: 12px;
     border-radius: 5px;
@@ -153,9 +153,6 @@
     margin-top: 10px;
 }
 #rename{
-    margin-right: 25px;
-    margin-left: 100px;
-    margin-top: 10px;
     color: white;
     padding: 12px;
     border-radius: 5px;
@@ -182,8 +179,6 @@
     margin-top: 10px;
 }
 #delete{
-    margin-right: 25px;
-    margin-left: 60px;
     margin-top: 10px;
     color: white;
     padding: 12px;
@@ -237,5 +232,10 @@
         border-radius: 5px;
         margin-left: 35px;
         margin-top: 11px;
+    }
+}
+@media only screen and (min-width: 1024px) and (max-width: 2560px){
+    #rename{
+        margin-left: 10%;
     }
 }

@@ -1,17 +1,17 @@
 body{
     width: 100%;
     height: 100%;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 .student-add-list{
-    box-sizing: border-box; 
+    box-sizing: border-box;
     border: 1px solid black;
     height: 53%;
     width: 80%;
     overflow-y: scroll;
 }
 .student-remove-list{
-    box-sizing: border-box; 
+    box-sizing: border-box;
     border: 1px solid black;
     height: 50%;
     width: 85%;
@@ -30,23 +30,23 @@ form {
     margin: 0;
   }
 .form-container {
-    display: flex; 
+    display: flex;
     width: 100%;
   }
-  
+
   /* Add form on the left */
 .add-form {
-    flex: 1; 
+    flex: 1;
     padding: 10px;
     border-right: 1px solid #ddd;
     /* margin-top: 4%; */
   }
-  
+
   .remove-form {
     flex: 1; /* Allocate equal width to both forms */
     padding: 10px; /* Add some padding for visual separation */
   }
-  
+
   /* Style list containers for student selection */
   .student-add-list,
   .student-remove-list {
@@ -54,19 +54,19 @@ form {
     height: 200px;
     overflow-y: scroll;
   }
-  
+
   /* Style buttons */
   .add-btn,
   .remove-btn {
     margin-top: 2px;
   }
-  
+
   /* Center "Add" button horizontally within its form */
   .add-btn {
     margin-left: auto;
     margin-right: auto;
   }
-  
+
   /* Center "Remove" button horizontally within its form */
   .remove-btn {
     margin-left: auto;
@@ -95,14 +95,14 @@ form {
       border-right: none;
     }
     .student-add-list{
-      box-sizing: border-box; 
+      box-sizing: border-box;
       border: 1px solid black;
       height: 53%;
       width: 100%;
       overflow-y: scroll;
   }
   .student-remove-list{
-      box-sizing: border-box; 
+      box-sizing: border-box;
       border: 1px solid black;
       height: 50%;
       width: 100%;

@@ -7,17 +7,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('auth', '0012_alter_user_first_name_max_length'),
-        ('myapp', '0001_initial'),
+        ("auth", "0012_alter_user_first_name_max_length"),
+        ("myapp", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='folders',
-            name='folder_name',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='auth.group'),
+            model_name="folders",
+            name="folder_name",
+            field=models.ForeignKey(
+                null=True, on_delete=django.db.models.deletion.CASCADE, to="auth.group"
+            ),
         ),
         migrations.DeleteModel(
-            name='groups_folder',
+            name="groups_folder",
         ),
     ]

@@ -128,8 +128,8 @@
       </nav>
       </nav>
       <br>
-      <a href="{% url 'group-list' %}" style="text-decoration: none; color: black;"><img src="{% static 'icons/arrow.png'%}" alt="" width="25px" > <span style="font-size: 18px; text-decoration: none;">Group</span></a> 
-    
+      <a href="{% url 'group-list' %}" style="text-decoration: none; color: black;"><img src="{% static 'icons/arrow.png'%}" alt="" width="25px" > <span style="font-size: 18px; text-decoration: none;">Group</span></a>
+
       {% if permission %}
     <div class="overlay">
         <form id="create-form" action="{% url 'folder-notes' pk %}" method="post">
@@ -178,8 +178,7 @@
         <img id="create-icon" src="{% static 'icons/plus (1).png'%}" width="50px" height="50px" class="create_img" >
         {% endif %}
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>   
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </body>
 </html>
-

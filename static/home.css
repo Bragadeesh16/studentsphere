@@ -21,8 +21,8 @@ body {
 .image-slider {
   position: relative;
   overflow: hidden;
-  width: 100%; 
-  height: 65%; 
+  width: 100%;
+  height: 65%;
   margin-top: 1%;
   overflow-x: hidden;
   background-color: #F5F5F5;
@@ -34,8 +34,8 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  opacity: 0; 
-  transition: opacity 0.5s ease-in-out; 
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
   -webkit-box-shadow: 5px 6px 5px 0px rgba(0,0,0,0.52);
   -moz-box-shadow: 5px 6px 5px 0px rgba(0,0,0,0.52);
   box-shadow: 5px 6px 5px 0px rgba(0,0,0,0.52);
@@ -44,7 +44,7 @@ body {
 }
 
 .slide.active {
-  opacity: 1; 
+  opacity: 1;
 }
 .slider-content{
   position: absolute;
@@ -62,13 +62,13 @@ body {
   font-size: 38px;
   text-align: center;
   margin-top: 30px;
-  
+
 }
 .about-sentence{
   margin: 30px 80px 30px 80px;
   font-size: 22px;
   text-align: center;
-  
+
 }
 header{
   /* margin-top: 5%; */
@@ -141,8 +141,8 @@ footer{
 .image-slider {
   position: relative;
   overflow: hidden;
-  width: 100%; 
-  height: 60%; 
+  width: 100%;
+  height: 60%;
   margin-top: 1%;
   overflow-x: hidden;
   background-color: #F5F5F5;
@@ -154,8 +154,8 @@ footer{
   position: absolute;
   top: 0;
   left: 0;
-  opacity: 0; 
-  transition: opacity 0.5s ease-in-out; 
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
   -webkit-box-shadow: 5px 6px 5px 0px rgba(0,0,0,0.52);
   -moz-box-shadow: 5px 6px 5px 0px rgba(0,0,0,0.52);
   box-shadow: 5px 6px 5px 0px rgba(0,0,0,0.52);
@@ -164,7 +164,7 @@ footer{
 }
 
 .slide.active {
-  opacity: 1; 
+  opacity: 1;
 }
 .slider-content{
   position: absolute;
@@ -183,13 +183,13 @@ footer{
   font-size: 28px;
   text-align: center;
   margin-top: 30px;
-  
+
 }
 .about-sentence{
   margin: 20px 10px 30px 10px;
   font-size: 15px;
   text-align: center;
-  
+
 }
 header{
   /* margin-top: 5%; */
@@ -204,7 +204,7 @@ header{
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-  
+
   }
   .contact-us{
     margin-right: 0px;
@@ -253,30 +253,30 @@ header{
   .image-slider {
     position: relative;
     overflow: hidden;
-    width: 100%; 
-    height: 60%; 
+    width: 100%;
+    height: 60%;
     margin-top: 1%;
     overflow-x: hidden;
     background-color: #F5F5F5;
     }
-  
+
   .slide {
     width: 94%;
     height: 50%;
     position: absolute;
     top: 0;
     left: 0;
-    opacity: 0; 
-    transition: opacity 0.5s ease-in-out; 
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
     -webkit-box-shadow: 5px 6px 5px 0px rgba(0,0,0,0.52);
     -moz-box-shadow: 5px 6px 5px 0px rgba(0,0,0,0.52);
     box-shadow: 5px 6px 5px 0px rgba(0,0,0,0.52);
     margin-left: 4%;
     margin-top: 1.3%;
   }
-  
+
   .slide.active {
-    opacity: 1; 
+    opacity: 1;
   }
   .slider-content{
     position: absolute;
@@ -293,30 +293,30 @@ header{
   .image-slider {
     position: relative;
     overflow: hidden;
-    width: 100%; 
-    height: 90%; 
+    width: 100%;
+    height: 90%;
     margin-top: 1%;
     overflow-x: hidden;
     background-color: #F5F5F5;
     }
-  
+
   .slide {
     width: 85%;
     height: 55%;
     position: absolute;
     top: 0;
     left: 0;
-    opacity: 0; 
-    transition: opacity 0.5s ease-in-out; 
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
     -webkit-box-shadow: 5px 6px 5px 0px rgba(0,0,0,0.52);
     -moz-box-shadow: 5px 6px 5px 0px rgba(0,0,0,0.52);
     box-shadow: 5px 6px 5px 0px rgba(0,0,0,0.52);
     margin-left: 9%;
     margin-top: 1.3%;
   }
-  
+
   .slide.active {
-    opacity: 1; 
+    opacity: 1;
   }
   .slider-content{
     position: absolute;
@@ -330,7 +330,7 @@ header{
     margin-top: 60%;
     margin-left: 3%;
   }
-  
+
 }
 @media only screen and (min-width: 1024px) and (max-width: 1025px){
   .slider-content{

@@ -1,5 +1,5 @@
 .input-form{
-    border: none; 
+    border: none;
     border-bottom: 1px solid black;
     background-color:lightgray;
     height: 5%;
@@ -18,18 +18,18 @@ body{
     box-sizing: border-box;
 }
 .form-container {
-    display: flex; 
+    display: flex;
     width: 100%;
 }
 .form-section-one {
-    flex: 1; 
+    flex: 1;
     padding: 10px;
     border-right: 1px solid black;
 }
-  
+
 .form-section-two {
     flex: 1;
-    padding: 10px; 
+    padding: 10px;
 }
 .btn{
     margin-left:80%;

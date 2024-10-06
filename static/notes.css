@@ -1,5 +1,5 @@
 .delete-overlay {
-    display: none; 
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -17,7 +17,7 @@
     background-color: white;
     padding: 29px;
     border-radius: 5px;
-}  
+}
 .delete{
     margin-top: 10px;
     color: white;
@@ -40,7 +40,7 @@
     margin-top: 4px;
 }
 .file{
-    box-sizing: border-box; 
+    box-sizing: border-box;
     width: 95%;
     font-size: 20px;
     display: inline-block;
@@ -109,7 +109,7 @@ h4{
         margin-top: 4px;
     }
     .file{
-        box-sizing: border-box; 
+        box-sizing: border-box;
         width: 85%;
         font-size: 20px;
         display: inline-block;
@@ -123,7 +123,7 @@ h4{
         margin-top: 2%;
         margin-bottom: 10px;
     }
-    
+
     .download-icon{
         position: absolute;
         right: 11%;
@@ -139,7 +139,7 @@ h4{
 @media only screen and (min-width: 1024px) and (max-width: 2560px){
     .delete{
         margin-left: 30%;
-        
+
     }
     #uplode{
         margin-left: 20%;

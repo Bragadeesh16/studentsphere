@@ -2,7 +2,7 @@ body{
     width: 100%;
 }
 .cse_second,.cse_three,.cse_four {
-    box-sizing: border-box; 
+    box-sizing: border-box;
     width: 95%;
     font-size: 20px;
     display: inline-block;

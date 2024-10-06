@@ -10,7 +10,7 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    text-align: center; 
+    text-align: center;
 }
 
 #create-form input[type="text"] {
@@ -20,7 +20,7 @@
 }
 
 #create-form button {
-    padding: 15px 30px; 
+    padding: 15px 30px;
     margin-top: 10px;
 }
 
@@ -35,20 +35,20 @@
 }
 
 #create-form #create {
-    background-color: #4CAF50; 
+    background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    margin-left: 20px; 
+    margin-left: 20px;
 }
 #create-form h2 {
-    text-align: left; 
+    text-align: left;
     margin-left: 11px;
 }
 .folder_name {
-    box-sizing: border-box; 
+    box-sizing: border-box;
     width: 87%;
     font-size: 25px;
     display: inline-block;
@@ -205,7 +205,7 @@
         border-radius: 5px;
     }
     .folder_name {
-        box-sizing: border-box; 
+        box-sizing: border-box;
         width: 65%;
         font-size: 25px;
         display: inline-block;
@@ -221,7 +221,7 @@
 }
 @media only screen and (min-width: 768px) and (max-width: 768px){
     .folder_name {
-        box-sizing: border-box; 
+        box-sizing: border-box;
         width: 75%;
         font-size: 25px;
         display: inline-block;

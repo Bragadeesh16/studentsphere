@@ -16,14 +16,6 @@ from django.contrib.auth.views import LoginView, PasswordResetView
 from django.urls import reverse_lazy, reverse
 from django.core.exceptions import ValidationError
 
-# from django.contrib.auth.models import User
-from django.contrib.auth import get_user_model
-
-User = get_user_model()
-
-load_dotenv()
-api_key = os.getenv("OPENAI_KEY", None)
-
 
 def home(request):
     permission = False
@@ -90,7 +82,6 @@ def profile(request):
 
         if form.is_valid():
             instance = form.save(commit=False)
-            instance.profile_user, instance.Name = request.user, request.user.username
             instance.save()
             return redirect("profile")
     else:
@@ -394,45 +385,6 @@ def manage_groups(request):
     group_list = Group.objects.all()
     return render(request, "manage_groups.html", {"group_list": group_list})
 
-
-# def chatbot(request):
-#     response = None
-#     if request.method == 'POST':
-#         user_input = request.POST.get('user_input')
-#         api_key = os.getenv('OPENAI_KEY', None)
-
-#         if api_key:
-#             openai.api_key = api_key
-#             prompt = user_input
-#             response = openai.Completion.create(
-#                 engine='gpt-3.5-turbo-0613',
-#                 prompt=prompt,
-#                 max_tokens=256,
-#                 temperature=0.5,
-#             )
-#             if response and response.choices:
-#                 response = response.choices[0].text.strip()
-
-#     return render(request, 'gpt.html', {'response': response})
-# def adduser(request):
-#    if (request.user.groups.filter(name='staff').exists() or request.user.is_superuser):
-#         student_list = User.objects.all()
-#         new_student = []
-#         for student in student_list:
-#             if (not student.groups.filter(name = 'student') and not student.is_superuser
-#                 and not student.groups.filter(name = 'staff')):
-#                 new_student.append(student)
-
-#         if request.method == 'POST':
-#             add_student_name = request.POST['std']
-#             add_users = User.objects.get(username=add_student_name)
-#             add_users  = User.objects.get(id = add_users.id)
-#             student_group = Group.objects.get(name = 'student')
-#             add_users.groups.add(student_group)
-
-#         return render(request,'manage_groups.html' ,{'student_list':new_student})
-#     else:
-#         return HttpResponse("you are not allowed")
 
 
 def download(request, file_id):

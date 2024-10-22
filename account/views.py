@@ -7,6 +7,7 @@ from django.contrib import messages
 from myapp.decorators import authenticate_users
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordResetView
+from .models import *
 
 def signup(request):
     form = signup_from()
@@ -56,8 +57,8 @@ def signout(request):
 @authenticate_users
 def profile(request):
     try:
-        user_profile = profiles.objects.get(profile_user=request.user)
-    except profiles.DoesNotExist:
+        user_profile = UserProfile.objects.get(profile_user=request.user)
+    except UserProfile.DoesNotExist:
         user_profile = None
 
     if request.method == "POST":

@@ -2,8 +2,11 @@
 {% load widget_tweaks %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
+<head>
+    {% block stylesheet%}
+    <link rel="stylesheet" href="{% static 'notes_folder.css' %}">
+    {% endblock %}
+</head>
 
 <body>
     {% block content%}

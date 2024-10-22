@@ -12,7 +12,6 @@ urlpatterns = [
         views.delete_file,
         name="delete_file",
     ),
-    path("manage-groups", views.manage_groups, name="showgroup"),
     path("download/<int:file_id>", views.download, name="download"),
     
 ]

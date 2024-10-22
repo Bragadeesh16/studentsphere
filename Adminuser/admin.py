@@ -4,3 +4,4 @@ from django.contrib.auth.admin import UserAdmin
 
 admin.site.register(file_uplode)
 admin.site.register(folders)
+admin.site.register(ClassGroup)

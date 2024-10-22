@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<head>
+    
+    {% block stylesheet%}
+    <link rel="stylesheet" href="{% static 'student_groups.css' %}">
+    {% endblock %}
+</head>
+<body>
+  {% block content%}
+  <a href="{% url 'home' %}" style="text-decoration: none; color: black;"><img src="{% static 'icons/arrow.png'%}" alt="" width="25px" > <span style="font-size: 18px; text-decoration: none;">home</span></a>
+    
+    <form action="" method="post" class="search">
+      {% csrf_token %}
+      <input type="text" name="search-element" class="search-input"> 
+      <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+    {% for groups in groups %}
+    <div class="grouplist">
+      <a href="{% url 'folder-notes' groups.id %}">{{ groups}}</a>
+    </div>
+    {% endfor %}
+  
+  {% endblock %}
+
+  {% block javascript %}
+  <script>
+    document.getElementById("myform").addEventListener("submit", function(event) {
+        event.preventDefault();
+    });
+  </script>
+  {% endblock%}
+</body>
+</html>

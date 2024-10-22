@@ -8,12 +8,25 @@ from django.forms import *
 from myapp.decorators import authenticate_staff,authenticate_users
 from django.conf import settings
 from django.http import HttpResponse, Http404
-from account.models import CustomUser,profiles
+from account.models import CustomUser,UserProfile
 from .models import *
 
 
 def CreateDynamicGroup(request):
-    pass
+    form = GroupForm()
+    if request.method == "POST":
+        form = GroupForm(request.POST)
+        
+        if form.is_valid():
+            group_name = form.cleaned_data['name'] 
+            Group.objects.create(name = group_name)
+            return redirect('group-list') # the from my views
+
+        else:
+            print("Your form is not valid")
+
+    form = uploding_folder()
+
 
 # get groups dymaically 
 @authenticate_staff
@@ -26,7 +39,7 @@ def student_details(request):
         student_list = CustomUser.objects.filter(groups__name=group_name)
         profile_objects = []
         for student in student_list:
-            profile = profiles.objects.filter(profile_user=student)
+            profile = UserProfile.objects.filter(profile_user=student)
             profile_objects.append(profile)
         return profile_objects
 
@@ -42,7 +55,7 @@ def student_details(request):
 
 @authenticate_users
 def notes_folder(request, pk):
-    group_name = Group.objects.get(pk=pk)
+    group_name = ClassGroup.objects.get(pk=pk)
     permission = False
     if request.user.groups.filter(name="staff").exists():
         permission = True
@@ -50,14 +63,14 @@ def notes_folder(request, pk):
         form = uploding_folder(request.POST)
         if form.is_valid():
             instance = form.save(commit=False)
-            instance.folder_name = Group.objects.get(name=group_name)
+            instance.folder_name = ClassGroup.objects.get(name=group_name)
             instance.save()
         else:
             print("Your form is not valid")
 
     if group_name:
-        folders_list = Group.objects.get(name=group_name)
-        linked_folders = folders.objects.filter(folder_name=folders_list)
+        folders_list = ClassGroup.objects.get(name=group_name)
+        linked_folders = folders.objects.filter(folder_from=folders_list)
     else:
         linked_folders = []
 
@@ -79,7 +92,7 @@ def notes_folder(request, pk):
 @authenticate_users
 def notes(request, group_id, folder_id):
     form = uploding_documents()
-    group = Group.objects.get(pk=group_id)
+    group = ClassGroup.objects.get(pk=group_id)
     folder = folders.objects.get(pk=folder_id)
     permission = False
 
@@ -140,11 +153,6 @@ def folder_rename(request):
         folder.save()
         return redirect("folder-notes", pk)
     
-@authenticate_staff
-def manage_groups(request):
-    group_list = Group.objects.all()
-    return render(request, "manage_groups.html", {"group_list": group_list})
-
 
 def download(request, file_id):
     try:

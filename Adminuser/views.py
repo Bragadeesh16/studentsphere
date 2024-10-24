@@ -5,53 +5,46 @@ from .forms import *
 from django.contrib import messages
 from django.contrib.auth.models import Group
 from django.forms import *
-from myapp.decorators import authenticate_staff,authenticate_users
+from myapp.decorators import (
+    authenticate_staff,
+    authenticate_users,
+)
 from django.conf import settings
 from django.http import HttpResponse, Http404
-from account.models import CustomUser,UserProfile
+from account.models import CustomUser, UserProfile
 from .models import *
+import openpyxl
 
 
-def CreateDynamicGroup(request):
-    form = GroupForm()
-    if request.method == "POST":
-        form = GroupForm(request.POST)
-        
-        if form.is_valid():
-            group_name = form.cleaned_data['name'] 
-            Group.objects.create(name = group_name)
-            return redirect('group-list') # the from my views
-
-        else:
-            print("Your form is not valid")
-
-    form = uploding_folder()
 
 
-# get groups dymaically 
-@authenticate_staff
 def student_details(request):
-    group_two = "Cse II"
-    group_three = "Cse III"
-    group_four = "Cse IV"
+    departments = [
+        "Computer science",
+        "Civil",
+        "Mechanical",
+        "ECE",
+        "EEE",
+        "IT",
+        "Cyber security",
+        "AIDS",
+    ]
+    years = ["First year", "Second year", "Third year", "Final year"]
+    
+    department_year_data = {}
 
-    def members_details(group_name):
-        student_list = CustomUser.objects.filter(groups__name=group_name)
-        profile_objects = []
-        for student in student_list:
-            profile = UserProfile.objects.filter(profile_user=student)
-            profile_objects.append(profile)
-        return profile_objects
+    for department in departments:
+        department_year_data[department] = {}
+        for year in years:
+            students = UserProfile.objects.filter(
+                department=department, year=year
+            )
+            department_year_data[department][year] = students
 
-    return render(
-        request,
-        "student_details.html",
-        {
-            "cse_two_details": members_details(group_two),
-            "cse_three_details": members_details(group_three),
-            "cse_four_details": members_details(group_four),
-        },
-    )
+    
+    return render(request, "student_details.html", {"department_year_data": department_year_data})
+
+
 
 @authenticate_users
 def notes_folder(request, pk):
@@ -63,13 +56,14 @@ def notes_folder(request, pk):
         form = uploding_folder(request.POST)
         if form.is_valid():
             instance = form.save(commit=False)
-            instance.folder_name = ClassGroup.objects.get(name=group_name)
+            instance.folder_from = ClassGroup.objects.get(name=group_name)
             instance.save()
         else:
             print("Your form is not valid")
 
     if group_name:
         folders_list = ClassGroup.objects.get(name=group_name)
+        print(folders_list)
         linked_folders = folders.objects.filter(folder_from=folders_list)
     else:
         linked_folders = []
@@ -105,7 +99,10 @@ def notes(request, group_id, folder_id):
             instance = form.save(commit=False)
             instance.file_from = folder
             instance.save()
-            messages.success(request, "Your file is uploaded successfully")
+            messages.success(
+                request,
+                "Your file is uploaded successfully",
+            )
             return redirect("notes", group_id, folder_id)
     try:
         files_list = file_uplode.objects.filter(file_from=folder)
@@ -133,7 +130,7 @@ def delete_folder(request):
         folder_name = folders.objects.get(id=folder_id)
         folder_name.delete()
         return redirect("folder-notes", pk)
-    
+
 
 def delete_file(request, group_id, folder_id):
     if request.method == "POST":
@@ -142,7 +139,7 @@ def delete_file(request, group_id, folder_id):
         file = file_uplode.objects.get(id=file_id)
         file.delete()
         return redirect("notes", group_id, folder_id)
-    
+
 
 def folder_rename(request):
     if request.method == "POST":
@@ -152,7 +149,7 @@ def folder_rename(request):
         folder.name = rename
         folder.save()
         return redirect("folder-notes", pk)
-    
+
 
 def download(request, file_id):
     try:
@@ -160,24 +157,75 @@ def download(request, file_id):
         path = file.notes
         file_path = os.path.join(settings.MEDIA_ROOT, str(path))
 
-        print("File Path:", file_path)  # Add this line for debugging
+        print("File Path:", file_path) 
 
         if os.path.exists(file_path):
             with open(file_path, "rb") as fh:
                 response = HttpResponse(
-                    fh.read(), content_type="application/vnd.ms-excel"
+                    fh.read(),
+                    content_type="application/vnd.ms-excel",
                 )
                 response["Content-Disposition"] = (
                     "inline; filename=" + os.path.basename(file_path)
                 )
                 return response
         else:
-            print("File does not exist")  # Add this line for debugging
+            print("File does not exist") 
             raise Http404("File not found")
     except file_uplode.DoesNotExist:
         raise Http404("File does not exist")
     except Exception as e:
-        # Log the exception for further investigation
         print(f"An error occurred: {str(e)}")
-        # You may want to log more detailed information about the error here
         raise Http404("An error occurred while processing the request")
+
+
+
+def export_student_data(request):
+    departments = [
+        "Computer science",
+        "Civil",
+        "Mechanical",
+        "ECE",
+        "EEE",
+        "IT",
+        "Cyber security",
+        "AIDS",
+    ]
+    years = ["First year", "Second year", "Third year", "Final year"]
+    workbook = openpyxl.Workbook()
+    for department in departments:
+        for year in years:
+            students = UserProfile.objects.filter(department=department, year=year)
+            if students.exists():
+                sheet = workbook.create_sheet(title=f"{department} - {year}")
+                headers = [
+                    "Name", "Phone Number", "Gender", "Department", "Year", 
+                    "Address", "Aadhar Number", "Father Name", "Mother Name", 
+                    "Father Occupation", "Mother Occupation", 
+                    "Father Phone Number", "Mother Phone Number", 
+                    "Annual Income", "Religion", "Caste", 
+                    "Community", "Mother Language"
+                ]
+                sheet.append(headers)
+
+                for student in students:
+                    row = [
+                        student.name, student.phone_number, student.gender, 
+                        student.department, student.year, 
+                        student.address, student.aadhar_number, 
+                        student.father_name, student.mother_name, 
+                        student.father_occupation, student.mother_occupation, 
+                        student.father_phone_number, student.mother_phone_number, 
+                        student.annual_income, student.religion, 
+                        student.caste, student.community, 
+                        student.mother_language
+                    ]
+                    sheet.append(row)
+
+    if 'Sheet' in workbook.sheetnames:
+        del workbook['Sheet']
+
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename=student_data.xlsx'
+    workbook.save(response)
+    return response

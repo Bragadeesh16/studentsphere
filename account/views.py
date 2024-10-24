@@ -2,12 +2,17 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.utils.translation import gettext_lazy as _
 from .forms import *
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import (
+    authenticate,
+    login,
+    logout,
+)
 from django.contrib import messages
 from myapp.decorators import authenticate_users
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordResetView
 from .models import *
+
 
 def signup(request):
     form = signup_from()
@@ -19,7 +24,10 @@ def signup(request):
             password = form.cleaned_data["password1"]
             user = authenticate(email=email, password=password)
             login(request, user)
-            messages.success(request, "your are signed in successfully")
+            messages.success(
+                request,
+                "your are signed in successfully",
+            )
             return redirect("home")
     else:
         form = signup_from()
@@ -40,7 +48,10 @@ def signin(request):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            messages.success(request, "your are logged in successfully")
+            messages.success(
+                request,
+                "your are logged in successfully",
+            )
             return redirect("home")
         else:
             form.add_error(None, _("invalid credentials"))
@@ -54,10 +65,11 @@ def signout(request):
     messages.success(request, "you have been logged out")
     return redirect("home")
 
+
 @authenticate_users
 def profile(request):
     try:
-        user_profile = UserProfile.objects.get(profile_user=request.user)
+        user_profile = UserProfile.objects.get(user=request.user)
     except UserProfile.DoesNotExist:
         user_profile = None
 
@@ -78,7 +90,8 @@ def profile(request):
                 "form": form,
             },
         )
-    
+
+
 class CustomPasswordResetView(PasswordResetView):
     template_name = "password_reset.html"
     success_url = reverse_lazy("resetPasswordDone")

@@ -3,13 +3,17 @@ from django.contrib.auth.models import Group
 
 
 class ClassGroup(models.Model):
-    name = models.CharField(max_length=100,unique=True)
-    
+    name = models.CharField(max_length=100, unique=True)
+
     def __str__(self) -> str:
         return self.name
+
+
 class folders(models.Model):
     name = models.CharField(max_length=50)
-    folder_from = models.ForeignKey(ClassGroup, on_delete=models.CASCADE, null=True)
+    folder_from = models.ForeignKey(
+        ClassGroup, on_delete=models.CASCADE, null=True
+    )
 
     def __str__(self) -> str:
         return self.name

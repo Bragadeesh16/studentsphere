@@ -9,26 +9,69 @@
 </head>
 <body>
   {% block content%}
+
+
   <a href="{% url 'home' %}" style="text-decoration: none; color: black;"><img src="{% static 'icons/arrow.png'%}" alt="" width="25px" > <span style="font-size: 18px; text-decoration: none;">home</span></a>
-    
-    <form action="" method="post" class="search">
+
+
+    <form action="{% url 'group-list' %}" method="post" class="search" id="myform">
       {% csrf_token %}
       <input type="text" name="search-element" class="search-input"> 
+
       <button class="btn btn-primary" type="submit">Search</button>
     </form>
+    <br>
+
+    {% if permission %}
+    <div class="overlay">
+        <form id="create-form" action="{% url 'create-group' %}" method="post">
+            {% csrf_token %}
+            <h2>create:</h2>
+            <input type="text" name="group_name">
+            <button id="cancel-create" type="button">Cancel</button>
+            <button type="submit" id="create">Create</button>
+        </form>
+    </div>
+    {% endif %}
+
+
     {% for groups in groups %}
     <div class="grouplist">
-      <a href="{% url 'folder-notes' groups.id %}">{{ groups}}</a>
+      <a href="{% url 'folder-notes' groups.id %}" style="color: white; text-decoration: none;">{{ groups}}</a>
     </div>
     {% endfor %}
+
+    <img id="create-icon" src="{% static 'icons/plus (1).png'%}" width="50px" height="50px" class="create_img" >
   
   {% endblock %}
 
+
+
+
   {% block javascript %}
   <script>
-    document.getElementById("myform").addEventListener("submit", function(event) {
-        event.preventDefault();
-    });
+    // document.getElementById("myform").addEventListener("submit", function(event) {
+    //     event.preventDefault();
+    // });
+
+    document.addEventListener("DOMContentLoaded", function() {
+            const imgIcon = document.getElementById("create-icon");
+            const overlay = document.querySelector(".overlay");
+            const createForm = document.getElementById("create-form");
+            const cancelCreateBtn = document.getElementById("cancel-create");
+
+            imgIcon.addEventListener("click", function() {  
+              console.log('hii')
+                overlay.style.display = "flex";
+                createForm.style.display = "block";
+            });
+
+            cancelCreateBtn.addEventListener("click", function(event) {
+                event.stopPropagation();  
+                overlay.style.display = "none";
+                createForm.style.display = "none";
+            });
+        });
   </script>
   {% endblock%}
 </body>

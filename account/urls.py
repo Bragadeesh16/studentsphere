@@ -14,7 +14,9 @@ urlpatterns = [
     path("signout", views.signout, name="signout"),
     path("profile", views.profile, name="profile"),
     path(
-        "resetpassword/", views.CustomPasswordResetView.as_view(), name="resetPassword"
+        "resetpassword/",
+        views.CustomPasswordResetView.as_view(),
+        name="resetPassword",
     ),
     path(
         "resetpassworddone/",
@@ -31,7 +33,9 @@ urlpatterns = [
     ),
     path(
         "resetpasswordcomplete/",
-        PasswordResetCompleteView.as_view(template_name="password_reset_complete.html"),
+        PasswordResetCompleteView.as_view(
+            template_name="password_reset_complete.html"
+        ),
         name="password_reset_complete",
     ),
 ]

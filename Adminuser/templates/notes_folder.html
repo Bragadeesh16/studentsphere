@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+<head>
+    {% block stylesheet%}
+    <link rel="stylesheet" href="{% static 'notes_folder.css' %}">
+    {% endblock %}
+</head>
+
+<body>
+    {% block content%}
+      <a href="{% url 'group-list' %}" style="text-decoration: none; color: black;"><img src="{% static 'icons/arrow.png'%}" alt="" width="25px" > <span style="font-size: 18px; text-decoration: none;">Group</span></a>
+
+      {% if permission %}
+    <div class="overlay">
+        <form id="create-form" action="{% url 'folder-notes' pk %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="group" value="{{ group_name }}">
+            <h2>create:</h2>
+            {% for i in form %}
+                {{ i }}
+            {% endfor %}
+            <button id="cancel-create" type="button">Cancel</button>
+            <button type="submit" id="create">Create</button>
+        </form>
+    </div>
+    {% endif %}
+    <div>
+        {% for folders in folder_name %}
+            <div class="data">
+                <a href="{% url 'notes' group_name.id folders.id %}" class="folder_name">{{ folders }}</a>
+                {% if permission %}
+                <img src="{% static 'icons/pencil.png'%}" alt="" width="30px" height="30px" class="remove-icon" id="rename-icon-{{ folders.id }}">
+                <img src="{% static 'icons/delete (2).png'%}" alt="" width="25px" height="25px" class="delete-icon" id="delete-icon-{{ folders.id }}">
+                {% endif %}
+            </div>
+            {% if permission %}
+            <div class="rename-overlay" id="rename-overlay-{{ folders.id }}">
+                <form action="{% url 'rename_folder'  %}" method="post" id="rename-form-{{ folders.id }}" class="rename_form">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ folders.id }} {{ pk }} " name="folder_id">
+                    <input type="text" value="{{ folders }}" name = 'rename' class="rename-input"> <br>
+                    <button id="cancel-rename" type="button">Cancel</button>
+                    <button type="submit" id="rename"> rename </button>
+                </form>
+            </div>
+            <div class="delete-overlay" id="delete-overlay-{{ folders.id }}">
+                <form action="{% url 'delete_folder'%}" method="post" id="delete-form-{{ folders.id }}" class="delete-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="delete_folder_name" value="{{folders.id}} {{pk}}">
+                    <p class="message">Are you sure you want to delete?</p>
+                    <button id="cancel-delete" type="button">Cancel</button>
+                    <button type="submit" id="delete">delete</button>
+                </form>
+            </div>
+            {% endif %}
+        {% endfor %}
+        {% if permission %}
+        <img id="create-icon" src="{% static 'icons/plus (1).png'%}" width="50px" height="50px" class="create_img" >
+        {% endif %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {% endblock %}
+
+    {% block javascript %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const imgIcon = document.getElementById("create-icon");
+            const overlay = document.querySelector(".overlay");
+            const createForm = document.getElementById("create-form");
+            const cancelCreateBtn = document.getElementById("cancel-create");
+
+            imgIcon.addEventListener("click", function() {
+                overlay.style.display = "flex";
+                createForm.style.display = "block";
+            });
+
+            cancelCreateBtn.addEventListener("click", function(event) {
+                event.stopPropagation();  // Prevent event from bubbling up
+                overlay.style.display = "none";
+                createForm.style.display = "none";
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const allRenameIcons = document.querySelectorAll(".remove-icon");
+
+            allRenameIcons.forEach(function(icon) {
+                icon.addEventListener("click", function() {
+                    const folderId = icon.id.split("-")[2];
+                    const overlay = document.getElementById("rename-overlay-" + folderId);
+                    const createForm = document.getElementById("rename-form-" + folderId);
+                    overlay.style.display = "flex";
+                    createForm.style.display = "block";
+                });
+            });
+
+            const allDeleteIcons = document.querySelectorAll(".delete-icon");
+
+            allDeleteIcons.forEach(function(icon) {
+                icon.addEventListener("click", function() {
+                    const folderId = icon.id.split("-")[2];
+                    const overlay = document.getElementById("delete-overlay-" + folderId);
+                    const createForm = document.getElementById("delete-form-" + folderId);
+                    overlay.style.display = "flex";
+                    createForm.style.display = "block";
+                });
+            });
+
+            const cancelRenameButtons = document.querySelectorAll("#cancel-rename");
+            cancelRenameButtons.forEach(function(button) {
+                button.addEventListener("click", function(event) {
+                    event.stopPropagation();  // Prevent event from bubbling up
+                    const overlay = button.closest(".rename-overlay"); // Find closest rename-overlay
+                    const createForm = overlay.querySelector("#rename-form");
+                    overlay.style.display = "none";
+                    createForm.style.display = "none";
+                });
+            });
+
+            const cancelDeleteButtons = document.querySelectorAll("#cancel-delete");
+            cancelDeleteButtons.forEach(function(button) {
+                button.addEventListener("click", function(event) {
+                    event.stopPropagation();  // Prevent event from bubbling up
+                    const overlay = button.closest(".delete-overlay"); // Find closest delete-overlay
+                    const createForm = overlay.querySelector("#delete-form");
+                    overlay.style.display = "none";
+                    createForm.style.display = "none";
+                });
+            });
+        });
+    </script>
+    {% endblock %}
+
+</body>
+</html>

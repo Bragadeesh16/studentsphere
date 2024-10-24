@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<head>
+  {% block stylesheet%}
+  
+    <style>
+        body {
+            width: 100%;
+        }
+        .full-table {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 80px; 
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-end; 
+            position: sticky; 
+            bottom: 20px; 
+            right: 20px; 
+            z-index: 1000; 
+            margin-top: 20px; 
+        }
+        .no-students {
+            color: red;
+            font-weight: bold;
+            margin: 10px 0;
+            text-align: center;
+            width: 100%; 
+        }
+        .table td {
+            text-align: center; 
+        }
+    </style>
+    {% endblock %}
+</head>
+<body>
+    {% block content %}
+    <br>
+    <div>
+        <a href="{% url 'home' %}" style="text-decoration: none; color: black;">
+            <img src="{% static 'icons/arrow.png' %}" alt="" width="25px"> 
+            <span style="font-size: 18px;">Home</span>
+        </a>
+    </div>
+    <br>
+    <div class="full-table">
+        <h3>Student Details</h3>
+        {% for department, years in department_year_data.items %}
+            <h4>{{ department }}</h4>
+            {% for year, students in years.items %}
+                <h5>{{ year }}</h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone Number</th>
+                            <th>Gender</th>
+                            <th>Department</th>
+                            <th>Year</th>
+                            <th>Address</th>
+                            <th>Aadhar Number</th>
+                            <th>Father Name</th>
+                            <th>Mother Name</th>
+                            <th>Father Occupation</th>
+                            <th>Mother Occupation</th>
+                            <th>Father Phone Number</th>
+                            <th>Mother Phone Number</th>
+                            <th>Annual Income</th>
+                            <th>Religion</th>
+                            <th>Caste</th>
+                            <th>Community</th>
+                            <th>Mother Language</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if students|length > 0 %}
+                            {% for student in students %}
+                            <tr>
+                                <td>{{ student.name }}</td>
+                                <td>{{ student.phone_number }}</td>
+                                <td>{{ student.gender }}</td>
+                                <td>{{ student.department }}</td>
+                                <td>{{ student.year }}</td>
+                                <td>{{ student.address }}</td>
+                                <td>{{ student.aadhar_number }}</td>
+                                <td>{{ student.father_name }}</td>
+                                <td>{{ student.mother_name }}</td>
+                                <td>{{ student.father_occupation }}</td>
+                                <td>{{ student.mother_occupation }}</td>
+                                <td>{{ student.father_phone_number }}</td>
+                                <td>{{ student.mother_phone_number }}</td>
+                                <td>{{ student.annual_income }}</td>
+                                <td>{{ student.religion }}</td>
+                                <td>{{ student.caste }}</td>
+                                <td>{{ student.community }}</td>
+                                <td>{{ student.mother_language }}</td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="17" class="no-students">No students available in this department and year.</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            {% endfor %}
+        {% endfor %}
+    </div>
+
+    <div class="button-container">
+        <a href="{% url 'export_student_data' %}" class="btn btn-primary">Download Excel</a>
+    </div>
+    
+    {% endblock %}
+</body>
+</html>

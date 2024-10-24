@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+<head>
+  {% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'profile.css' %}">
+  {% endblock %}
+</head>
+<body>
+    {% block content %}
+    
+    <a href="{% url 'home' %}" style="text-decoration: none; color: black;">
+        <img src="{% static 'icons/arrow.png' %}" alt="" width="25px"> 
+        <span style="font-size: 18px; text-decoration: none;">home</span>
+    </a> 
+    <br>
+    <img src="{% static 'photos/Banner 1.svg' %}" alt="" width="100%" height="40%">
+    
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-container">
+          <div class="form-section-one">
+            <label for="id_name">Name:</label>
+            {{ form.name }}
+            <label for="id_phone_number">Phone Number:</label>
+            {{ form.phone_number }}
+            <label for="id_gender">Gender:</label>
+            {{ form.gender }}
+            <label for="id_department">Department:</label>
+            {{ form.department }}
+            <label for="id_year">Year:</label>
+            {{ form.year }} 
+            <label for="id_address">Address:</label>
+            {{ form.address }}
+            <label for="id_aadhar_number">Aadhar Number:</label>
+            {{ form.aadhar_number }}
+            <label for="id_father_name">Father Name:</label>
+            {{ form.father_name }}
+            <label for="id_mother_name">Mother Name:</label>
+            {{ form.mother_name }}
+            
+          </div>
+          
+          <div class="form-section-two">
+            <label for="id_passedout_year">Passed Out Year:</label>
+            {{ form.passedout_year }} 
+            <label for="id_father_occupation">Father Occupation:</label>
+            {{ form.father_occupation }}
+            <label for="id_mother_occupation">Mother Occupation:</label>
+            {{ form.mother_occupation }}
+            <label for="id_father_phone_number">Father Phone Number:</label>
+            {{ form.father_phone_number }}
+            <label for="id_mother_phone_number">Mother Phone Number:</label>
+            {{ form.mother_phone_number }}
+            <label for="id_annual_income">Annual Income:</label>
+            {{ form.annual_income }}
+            <label for="id_religion">Religion:</label>
+            {{ form.religion }}
+            <label for="id_caste">Caste:</label>
+            {{ form.caste }}
+            <label for="id_community">Community:</label>
+            {{ form.community }}
+            <label for="id_mother_language">Mother Language:</label>
+            {{ form.mother_language }}
+            <br>
+            <button type="submit" class="btn btn-secondary p-3">Save</button>
+          </div>
+        </div>
+    </form>
+    {% endblock %}
+</body>
+</html>
